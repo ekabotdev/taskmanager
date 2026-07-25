@@ -1,6 +1,6 @@
 package com.ekabotdev.taskmanager.exception;
 
-public class EmailAlreadyExistsException   extends RuntimeException {
+public class EmailAlreadyExistsException   extends ResourceAlreadyExistsException {
     public EmailAlreadyExistsException(String message) {
         super(message);
     }
