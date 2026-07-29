@@ -1,17 +1,14 @@
 package com.ekabotdev.taskmanager.dto;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
 @Setter
-@AllArgsConstructor
+@Getter
 @NoArgsConstructor
-public class UserResponse {
-    private Long id;
-    private String username;
-    private String email;
+@AllArgsConstructor
+public class LoginResponse {
+    private String message;
 }

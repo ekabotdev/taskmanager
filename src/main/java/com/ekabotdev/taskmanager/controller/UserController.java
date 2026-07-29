@@ -1,6 +1,8 @@
 package com.ekabotdev.taskmanager.controller;
 
 
+import com.ekabotdev.taskmanager.dto.LoginRequest;
+import com.ekabotdev.taskmanager.dto.LoginResponse;
 import com.ekabotdev.taskmanager.dto.RegisterRequest;
 import com.ekabotdev.taskmanager.dto.UserResponse;
 import com.ekabotdev.taskmanager.service.UserService;
@@ -9,7 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/auth")
 public class UserController {
     private final UserService userService;
 
@@ -22,6 +24,10 @@ public class UserController {
             @Valid @RequestBody RegisterRequest registerRequest) {
 
         return userService.register(registerRequest);
+    }
+    @PostMapping("/login")
+    public LoginResponse loginUser( @Valid @RequestBody LoginRequest loginRequest) {
+        return userService.login(loginRequest);
     }
     }
 
