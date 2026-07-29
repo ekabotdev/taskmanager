@@ -1,7 +1,7 @@
 package com.ekabotdev.taskmanager.entity;
 
-import com.ekabotdev.taskmanager.enums.Priority;
-import com.ekabotdev.taskmanager.enums.Status;
+import com.ekabotdev.taskmanager.enums.TaskPriority;
+import com.ekabotdev.taskmanager.enums.TaskStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -38,12 +38,12 @@ public class Task {
     @NotNull
     @Column(nullable = false, length = 20)
     @Enumerated(EnumType.STRING)
-    private Status status;
+    private TaskStatus taskStatus;
 
     @NotNull
     @Column(nullable = false, length = 20)
     @Enumerated(EnumType.STRING)
-    private Priority priority;
+    private TaskPriority taskPriority;
 
     @NotNull
     @Column( name = "due_date",nullable = false)

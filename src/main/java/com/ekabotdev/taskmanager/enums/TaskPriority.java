@@ -1,6 +1,6 @@
 package com.ekabotdev.taskmanager.enums;
 
-public enum Priority {
+public enum TaskPriority {
     LOW,
     MEDIUM,
     HIGH
