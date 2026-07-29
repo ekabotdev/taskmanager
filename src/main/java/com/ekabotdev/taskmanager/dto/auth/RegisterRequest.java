@@ -1,4 +1,4 @@
-package com.ekabotdev.taskmanager.dto;
+package com.ekabotdev.taskmanager.dto.auth;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

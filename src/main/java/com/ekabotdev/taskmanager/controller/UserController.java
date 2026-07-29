@@ -1,10 +1,10 @@
 package com.ekabotdev.taskmanager.controller;
 
 
-import com.ekabotdev.taskmanager.dto.LoginRequest;
-import com.ekabotdev.taskmanager.dto.LoginResponse;
-import com.ekabotdev.taskmanager.dto.RegisterRequest;
-import com.ekabotdev.taskmanager.dto.UserResponse;
+import com.ekabotdev.taskmanager.dto.auth.LoginRequest;
+import com.ekabotdev.taskmanager.dto.auth.LoginResponse;
+import com.ekabotdev.taskmanager.dto.auth.RegisterRequest;
+import com.ekabotdev.taskmanager.dto.auth.UserResponse;
 import com.ekabotdev.taskmanager.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;

@@ -1,15 +1,15 @@
 package com.ekabotdev.taskmanager.service;
 
 
-import com.ekabotdev.taskmanager.dto.LoginRequest;
-import com.ekabotdev.taskmanager.dto.LoginResponse;
-import com.ekabotdev.taskmanager.dto.RegisterRequest;
-import com.ekabotdev.taskmanager.dto.UserResponse;
+import com.ekabotdev.taskmanager.dto.auth.LoginRequest;
+import com.ekabotdev.taskmanager.dto.auth.LoginResponse;
+import com.ekabotdev.taskmanager.dto.auth.RegisterRequest;
+import com.ekabotdev.taskmanager.dto.auth.UserResponse;
 import com.ekabotdev.taskmanager.entity.User;
 import com.ekabotdev.taskmanager.enums.Role;
-import com.ekabotdev.taskmanager.exception.EmailAlreadyExistsException;
-import com.ekabotdev.taskmanager.exception.InvalidCredentialsException;
-import com.ekabotdev.taskmanager.exception.UsernameAlreadyExistsException;
+import com.ekabotdev.taskmanager.exception.customexception.EmailAlreadyExistsException;
+import com.ekabotdev.taskmanager.exception.customexception.InvalidCredentialsException;
+import com.ekabotdev.taskmanager.exception.customexception.UsernameAlreadyExistsException;
 import com.ekabotdev.taskmanager.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

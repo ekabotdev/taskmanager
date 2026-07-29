@@ -1,4 +1,4 @@
-package com.ekabotdev.taskmanager.dto;
+package com.ekabotdev.taskmanager.dto.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

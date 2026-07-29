@@ -1,4 +1,4 @@
-package com.ekabotdev.taskmanager.exception;
+package com.ekabotdev.taskmanager.exception.globalexception;
 
 
 import lombok.AllArgsConstructor;
