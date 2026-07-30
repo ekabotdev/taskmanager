@@ -87,4 +87,18 @@ public class TaskService {
                 taskPage.isLast()
         );
     }
+
+    @Transactional(readOnly = true)
+    public TaskResponse getTasksById (  Long taskId, String authenticatedEmail) {
+        User user = userRepository.findByEmail(authenticatedEmail).orElseThrow(() ->
+         new ResourceNotFoundException("Authenticated user is not found."));
+
+        Task task = taskRepository.findByIdAndUser_Id(taskId,user.getId()).orElseThrow(() ->
+                new ResourceNotFoundException("Task not found."));
+
+        Task savedTask = taskRepository.save(task);
+
+        return mapToResponse(savedTask);
+
+    }
 }

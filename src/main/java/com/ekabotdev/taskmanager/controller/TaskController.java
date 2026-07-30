@@ -43,4 +43,10 @@ public class TaskController {
 
         return ResponseEntity.ok(response);
     }
+    @GetMapping("/{taskId}")
+    public ResponseEntity<TaskResponse> getTaskById(  @PathVariable Long taskId, Authentication authentication) {
+        String authenticatedEmail = authentication.getName();
+        TaskResponse response = taskService.getTasksById( taskId , authenticatedEmail);
+        return ResponseEntity.ok(response);
+    }
 }
