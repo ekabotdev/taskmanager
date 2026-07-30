@@ -2,18 +2,19 @@ package com.ekabotdev.taskmanager.controller;
 
 
 import com.ekabotdev.taskmanager.dto.task.CreateTaskRequest;
+import com.ekabotdev.taskmanager.dto.task.PageResponse;
 import com.ekabotdev.taskmanager.dto.task.TaskResponse;
 import com.ekabotdev.taskmanager.service.TaskService.TaskService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/tasks")
@@ -32,5 +33,14 @@ public class TaskController {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(response);
+    }
+    @GetMapping
+    public ResponseEntity<PageResponse<TaskResponse>> getAllTasks(Authentication authentication,
+                                                                  Pageable pageable) {
+        String authenticatedEmail = authentication.getName();
+
+        PageResponse<TaskResponse> response = taskService.getTasks(authenticatedEmail, pageable);
+
+        return ResponseEntity.ok(response);
     }
 }
