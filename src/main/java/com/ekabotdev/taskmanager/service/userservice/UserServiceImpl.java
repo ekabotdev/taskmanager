@@ -1,4 +1,4 @@
-package com.ekabotdev.taskmanager.service;
+package com.ekabotdev.taskmanager.service.userservice;
 
 
 import com.ekabotdev.taskmanager.dto.auth.LoginRequest;
@@ -11,6 +11,7 @@ import com.ekabotdev.taskmanager.exception.customexception.EmailAlreadyExistsExc
 import com.ekabotdev.taskmanager.exception.customexception.InvalidCredentialsException;
 import com.ekabotdev.taskmanager.exception.customexception.UsernameAlreadyExistsException;
 import com.ekabotdev.taskmanager.repository.UserRepository;
+import com.ekabotdev.taskmanager.service.jwtservice.JwtService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.ekabotdev.taskmanager.service;
+package com.ekabotdev.taskmanager.service.userservice;
 
 import com.ekabotdev.taskmanager.dto.auth.LoginRequest;
 import com.ekabotdev.taskmanager.dto.auth.LoginResponse;

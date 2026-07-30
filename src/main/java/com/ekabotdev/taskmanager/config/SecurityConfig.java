@@ -1,7 +1,7 @@
 package com.ekabotdev.taskmanager.config;
 
 import com.ekabotdev.taskmanager.security.JwtAuthenticationFilter;
-import com.ekabotdev.taskmanager.service.CustomUserDetailService;
+import com.ekabotdev.taskmanager.service.userservice.CustomUserDetailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

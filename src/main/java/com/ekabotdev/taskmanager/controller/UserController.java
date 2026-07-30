@@ -5,7 +5,7 @@ import com.ekabotdev.taskmanager.dto.auth.LoginRequest;
 import com.ekabotdev.taskmanager.dto.auth.LoginResponse;
 import com.ekabotdev.taskmanager.dto.auth.RegisterRequest;
 import com.ekabotdev.taskmanager.dto.auth.UserResponse;
-import com.ekabotdev.taskmanager.service.UserService;
+import com.ekabotdev.taskmanager.service.userservice.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

@@ -1,8 +1,8 @@
 package com.ekabotdev.taskmanager.security;
 
 
-import com.ekabotdev.taskmanager.service.CustomUserDetailService;
-import com.ekabotdev.taskmanager.service.JwtService;
+import com.ekabotdev.taskmanager.service.userservice.CustomUserDetailService;
+import com.ekabotdev.taskmanager.service.jwtservice.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -36,17 +36,31 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return;
         }
         String jwt = authHeader.substring(7);
-        String username =jwtService.extractUsername(jwt);
+        // Extract the email string from the token
+        String email = jwtService.extractUsername(jwt);
 
-        UserDetails userDetails = customUserDetailService.loadUserByUsername(username);
+// Ensure security context isn't already authenticated
+        if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
-        if (jwtService.validateToken(jwt, userDetails)) {
-            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-                    userDetails, null, userDetails.getAuthorities()
-            );
-            authentication.setDetails(authentication.getDetails());
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+            UserDetails userDetails = customUserDetailService.loadUserByUsername(email);
+
+            // FIX: Change your validation check to only verify if the token is expired/valid,
+            // or pass the userDetails if your jwtService requires it.
+            if (jwtService.validateToken(jwt, userDetails)) {
+                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+                        userDetails,
+                        null,
+                        userDetails.getAuthorities()
+                );
+
+                // FIX: Fix the details assignment bug here too
+                authentication.setDetails(new org.springframework.security.web.authentication.WebAuthenticationDetailsSource().buildDetails(request));
+
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            }
         }
+
         filterChain.doFilter(request, response);
+
     }
 }

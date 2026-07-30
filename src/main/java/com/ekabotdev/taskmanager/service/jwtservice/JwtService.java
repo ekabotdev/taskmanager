@@ -1,4 +1,4 @@
-package com.ekabotdev.taskmanager.service;
+package com.ekabotdev.taskmanager.service.jwtservice;
 
 
 import com.ekabotdev.taskmanager.entity.User;
@@ -26,7 +26,7 @@ public class JwtService {
     }
     public String generateToken(User user){
         return Jwts.builder()
-                .subject(user.getUsername())
+                .subject(user.getEmail())
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + jwtExpiration))
                 .signWith(getSigningKey())
