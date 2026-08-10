@@ -39,17 +39,17 @@ public class SecurityConfig {
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.POST, "/api/students")
+                        .requestMatchers(HttpMethod.POST, "/api/tasks")
                         .hasRole("ADMIN")
 
-                        .requestMatchers(HttpMethod.PUT, "/api/students/**")
+                        .requestMatchers(HttpMethod.PUT, "/api/tasks/**")
                         .hasRole("ADMIN")
 
-                        .requestMatchers(HttpMethod.DELETE, "/api/students/**")
+                        .requestMatchers(HttpMethod.DELETE, "/api/tasks/**")
                         .hasRole("ADMIN")
 
-                        .requestMatchers(HttpMethod.GET, "/api/students/**")
-                        .hasAnyRole("ADMIN","STUDENT")
+                        .requestMatchers(HttpMethod.GET, "/api/tasks/**")
+                        .hasAnyRole("ADMIN","USER")
 
                         .requestMatchers("/auth/**", "/swagger-ui/**",
                                 "/v3/api-docs/**",

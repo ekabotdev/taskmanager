@@ -39,13 +39,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         // Extract the email string from the token
         String email = jwtService.extractUsername(jwt);
 
-// Ensure security context isn't already authenticated
+
         if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
             UserDetails userDetails = customUserDetailService.loadUserByUsername(email);
 
-            // FIX: Change your validation check to only verify if the token is expired/valid,
-            // or pass the userDetails if your jwtService requires it.
+
             if (jwtService.validateToken(jwt, userDetails)) {
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                         userDetails,
@@ -53,7 +52,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                         userDetails.getAuthorities()
                 );
 
-                // FIX: Fix the details assignment bug here too
+
                 authentication.setDetails(new org.springframework.security.web.authentication.WebAuthenticationDetailsSource().buildDetails(request));
 
                 SecurityContextHolder.getContext().setAuthentication(authentication);

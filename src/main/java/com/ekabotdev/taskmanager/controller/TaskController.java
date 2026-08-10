@@ -4,6 +4,7 @@ package com.ekabotdev.taskmanager.controller;
 import com.ekabotdev.taskmanager.dto.task.CreateTaskRequest;
 import com.ekabotdev.taskmanager.dto.task.PageResponse;
 import com.ekabotdev.taskmanager.dto.task.TaskResponse;
+import com.ekabotdev.taskmanager.dto.task.UpdateTaskRequest;
 import com.ekabotdev.taskmanager.service.TaskService.TaskService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -43,10 +44,24 @@ public class TaskController {
 
         return ResponseEntity.ok(response);
     }
+
+
     @GetMapping("/{taskId}")
     public ResponseEntity<TaskResponse> getTaskById(  @PathVariable Long taskId, Authentication authentication) {
         String authenticatedEmail = authentication.getName();
         TaskResponse response = taskService.getTasksById( taskId , authenticatedEmail);
         return ResponseEntity.ok(response);
+    }
+
+    @PatchMapping("/{taskId}")
+
+    public ResponseEntity<TaskResponse> updateTask(@PathVariable Long taskId,
+                                                   @Valid @RequestBody UpdateTaskRequest updateTaskRequest,
+                                                   Authentication authentication) {
+        String authenticatedEmail = authentication.getName();
+
+        TaskResponse taskResponse = taskService.updateTask(taskId,updateTaskRequest,authenticatedEmail);
+
+        return ResponseEntity.ok(taskResponse);
     }
 }

@@ -4,6 +4,7 @@ import com.ekabotdev.taskmanager.dto.auth.UserResponse;
 import com.ekabotdev.taskmanager.dto.task.CreateTaskRequest;
 import com.ekabotdev.taskmanager.dto.task.PageResponse;
 import com.ekabotdev.taskmanager.dto.task.TaskResponse;
+import com.ekabotdev.taskmanager.dto.task.UpdateTaskRequest;
 import com.ekabotdev.taskmanager.dto.user.UserSummaryResponse;
 import com.ekabotdev.taskmanager.entity.Task;
 import com.ekabotdev.taskmanager.entity.User;
@@ -88,6 +89,8 @@ public class TaskService {
         );
     }
 
+
+
     @Transactional(readOnly = true)
     public TaskResponse getTasksById (  Long taskId, String authenticatedEmail) {
         User user = userRepository.findByEmail(authenticatedEmail).orElseThrow(() ->
@@ -99,6 +102,40 @@ public class TaskService {
         Task savedTask = taskRepository.save(task);
 
         return mapToResponse(savedTask);
+
+    }
+
+
+
+    @Transactional
+    public TaskResponse updateTask (Long taskId,
+                                    UpdateTaskRequest request,
+                                    String authenticatedEmail) {
+
+        User user = userRepository.findByEmail(authenticatedEmail).orElseThrow(() ->
+                new ResourceNotFoundException("Authenticated user is not found."));
+
+        Task task = taskRepository.findByIdAndUser_Id(taskId,user.getId()).orElseThrow(() ->
+        new ResourceNotFoundException("Task not found."
+              )
+        );
+
+        if (request.getTitle() != null) {
+            task.setTitle(request.getTitle());
+        }
+        if (request.getDescription() != null) {
+            task.setDescription(request.getDescription());
+        }
+        if (request.getStatus() != null) {
+            task.setTaskStatus(request.getStatus());
+        }
+        if (request.getPriority() != null) {
+            task.setTaskPriority(request.getPriority());
+        }
+        if (request.getDueDate() != null) {
+            task.setDueDate(request.getDueDate());
+        }
+        return mapToResponse(task);
 
     }
 }
