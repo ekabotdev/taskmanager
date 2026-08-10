@@ -7,6 +7,7 @@ import com.ekabotdev.taskmanager.dto.auth.RegisterRequest;
 import com.ekabotdev.taskmanager.dto.auth.UserResponse;
 import com.ekabotdev.taskmanager.service.userservice.UserService;
 import jakarta.validation.Valid;
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,5 +30,6 @@ public class UserController {
     public LoginResponse loginUser( @Valid @RequestBody LoginRequest loginRequest) {
         return userService.login(loginRequest);
     }
+
     }
 

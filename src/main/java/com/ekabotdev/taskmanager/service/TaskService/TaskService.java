@@ -138,4 +138,19 @@ public class TaskService {
         return mapToResponse(task);
 
     }
+
+    @Transactional
+    public void deleteTask(Long taskId, String authenticatedEmail) {
+        User user = userRepository.findByEmail(authenticatedEmail).orElseThrow(() ->
+                new ResourceNotFoundException("Authenticated user is not found."
+                )
+        );
+
+        Task task = taskRepository.findByIdAndUser_Id(taskId,user.getId()).orElseThrow(() ->
+        new ResourceNotFoundException("Task not found."
+            )
+        );
+        taskRepository.delete(task);
+
+    }
 }

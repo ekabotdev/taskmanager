@@ -64,4 +64,11 @@ public class TaskController {
 
         return ResponseEntity.ok(taskResponse);
     }
+    @DeleteMapping("/{taskId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteTask(@PathVariable Long taskId, Authentication authentication) {
+        String authenticatedEmail = authentication.getName();
+        taskService.deleteTask(taskId ,
+                authenticatedEmail);
+    }
 }
