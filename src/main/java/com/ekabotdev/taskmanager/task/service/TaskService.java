@@ -6,6 +6,7 @@ import com.ekabotdev.taskmanager.task.dto.TaskResponse;
 import com.ekabotdev.taskmanager.task.dto.UpdateTaskRequest;
 import com.ekabotdev.taskmanager.task.enums.TaskPriority;
 import com.ekabotdev.taskmanager.task.enums.TaskStatus;
+import com.ekabotdev.taskmanager.task.exception.BadRequestException;
 import com.ekabotdev.taskmanager.task.specification.TaskSpecification;
 import com.ekabotdev.taskmanager.user.dto.UserSummaryResponse;
 import com.ekabotdev.taskmanager.task.entity.Task;
@@ -192,9 +193,13 @@ public class TaskService {
         if (request.getDescription() != null) {
             task.setDescription(request.getDescription());
         }
-        if (request.getStatus() != null) {
-            task.setTaskStatus(request.getStatus());
-        }
+       if (request.getStatus() != null) {
+           validateStatusTransition(
+                   task.getTaskStatus(),
+                   request.getStatus()
+           );
+           task.setTaskStatus(request.getStatus());
+       }
         if (request.getPriority() != null) {
             task.setTaskPriority(request.getPriority());
         }
@@ -244,5 +249,17 @@ public class TaskService {
                 taskPage.isFirst(),
                 taskPage.isLast()
         );
+    }
+
+    private void validateStatusTransition (TaskStatus currentStatus, TaskStatus newStatus) {
+        if (currentStatus == TaskStatus.TODO
+        && newStatus == TaskStatus.COMPLETED) {
+            throw new BadRequestException(
+                    "A todo task my be in progress before it can be completed");
+        }
+        if (currentStatus == TaskStatus.COMPLETED
+        && newStatus == TaskStatus.COMPLETED) {
+            throw new BadRequestException("A completed task cannot be reopened.");
+        }
     }
 }

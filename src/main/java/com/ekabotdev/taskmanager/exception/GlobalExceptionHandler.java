@@ -1,6 +1,7 @@
 package com.ekabotdev.taskmanager.exception;
 
 
+import com.ekabotdev.taskmanager.task.exception.BadRequestException;
 import com.ekabotdev.taskmanager.task.exception.ResourceAlreadyExistsException;
 import com.ekabotdev.taskmanager.task.exception.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -55,6 +56,19 @@ public class GlobalExceptionHandler {
                 LocalDateTime.now(),
                 HttpStatus.NOT_FOUND.value(),
                 HttpStatus.NOT_FOUND.getReasonPhrase(),
+                ex.getMessage(),
+                request.getRequestURI()
+        );
+    }
+
+    @ExceptionHandler(BadRequestException.class)
+    public ErrorsResponse handleBadRequestException
+            (BadRequestException ex, HttpServletRequest request) {
+
+        return new ErrorsResponse(
+                LocalDateTime.now(),
+                HttpStatus.BAD_REQUEST.value(),
+                HttpStatus.BAD_REQUEST.getReasonPhrase(),
                 ex.getMessage(),
                 request.getRequestURI()
         );
