@@ -17,6 +17,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+
 @RestController
 @RequestMapping("/api/tasks")
 @RequiredArgsConstructor
@@ -40,13 +42,21 @@ public class TaskController {
             (
                     @RequestParam(required = false)TaskStatus status,
                     @RequestParam(required = false)TaskPriority priority,
-                    @RequestParam(required = false) String search
+                    @RequestParam(required = false) String search,
+                    @RequestParam(required = false)LocalDateTime dueBefore,
+                    @RequestParam(required = false) LocalDateTime dueAfter
                     , Authentication authentication,
                     Pageable pageable) {
         String authenticatedEmail = authentication.getName();
 
         PageResponse<TaskResponse> response = taskService.getTasks
-                (status,priority,search,authenticatedEmail, pageable);
+                (
+                        status,
+                        priority,
+                        search,
+                        dueBefore,
+                        dueAfter,
+                        authenticatedEmail, pageable);
 
         return ResponseEntity.ok(response);
     }

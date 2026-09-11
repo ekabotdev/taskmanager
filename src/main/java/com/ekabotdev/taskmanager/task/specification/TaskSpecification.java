@@ -5,6 +5,8 @@ import com.ekabotdev.taskmanager.task.enums.TaskPriority;
 import com.ekabotdev.taskmanager.task.enums.TaskStatus;
 import org.springframework.data.jpa.domain.Specification;
 
+import java.time.LocalDateTime;
+
 public class TaskSpecification {
 
     public static Specification<Task> search (String search) {
@@ -61,5 +63,18 @@ public class TaskSpecification {
                                 TaskStatus.COMPLETED
                         )
                 ));
+    }
+
+    public static Specification<Task> dueBefore (LocalDateTime date) {
+        return ((root, query, criteriaBuilder) ->
+                criteriaBuilder.lessThanOrEqualTo(root.get("dueDate"),
+                        date
+                ));
+    }
+
+    public static Specification<Task> dueAfter (LocalDateTime date) {
+        return ((root, query, criteriaBuilder) ->
+                criteriaBuilder.greaterThanOrEqualTo(root.get("dueDate"),
+                        date));
     }
 }

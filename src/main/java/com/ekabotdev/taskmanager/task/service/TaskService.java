@@ -21,6 +21,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
@@ -75,6 +76,8 @@ public class TaskService {
             TaskStatus status,
             TaskPriority priority,
             String search,
+            LocalDateTime dueBefore,
+            LocalDateTime dueAfter,
             String authenticatedEmail,
              Pageable pageable) {
 
@@ -121,6 +124,16 @@ public class TaskService {
           specification = specification.and(
                   TaskSpecification.search(search.trim())
           );
+        }
+        if (dueBefore != null) {
+            specification = specification.and(
+                    TaskSpecification.dueBefore(dueBefore)
+            );
+        }
+        if (dueAfter != null) {
+            specification = specification.and(
+                    TaskSpecification.dueAfter(dueAfter)
+            );
         }
 
 
