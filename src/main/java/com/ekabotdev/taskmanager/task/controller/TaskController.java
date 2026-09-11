@@ -5,7 +5,9 @@ import com.ekabotdev.taskmanager.task.dto.CreateTaskRequest;
 import com.ekabotdev.taskmanager.task.dto.PageResponse;
 import com.ekabotdev.taskmanager.task.dto.TaskResponse;
 import com.ekabotdev.taskmanager.task.dto.UpdateTaskRequest;
-import com.ekabotdev.taskmanager.task.TaskService;
+import com.ekabotdev.taskmanager.task.enums.TaskPriority;
+import com.ekabotdev.taskmanager.task.enums.TaskStatus;
+import com.ekabotdev.taskmanager.task.service.TaskService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -34,11 +36,17 @@ public class TaskController {
                 .body(response);
     }
     @GetMapping
-    public ResponseEntity<PageResponse<TaskResponse>> getAllTasks(Authentication authentication,
-                                                                  Pageable pageable) {
+    public ResponseEntity<PageResponse<TaskResponse>> getAllTasks
+            (
+                    @RequestParam(required = false)TaskStatus status,
+                    @RequestParam(required = false)TaskPriority priority,
+                    @RequestParam(required = false) String search
+                    , Authentication authentication,
+                    Pageable pageable) {
         String authenticatedEmail = authentication.getName();
 
-        PageResponse<TaskResponse> response = taskService.getTasks(authenticatedEmail, pageable);
+        PageResponse<TaskResponse> response = taskService.getTasks
+                (status,priority,search,authenticatedEmail, pageable);
 
         return ResponseEntity.ok(response);
     }
@@ -68,5 +76,17 @@ public class TaskController {
         String authenticatedEmail = authentication.getName();
         taskService.deleteTask(taskId ,
                 authenticatedEmail);
+    }
+
+
+    @GetMapping("/overdue")
+    public ResponseEntity<PageResponse<TaskResponse>> getOverdueTasks
+            ( Authentication authentication, Pageable pageable) {
+        String authenticatedEmail = authentication.getName();
+
+        PageResponse<TaskResponse> response = taskService.getOverdueTasks
+                (authenticatedEmail, pageable);
+
+        return ResponseEntity.ok(response);
     }
 }

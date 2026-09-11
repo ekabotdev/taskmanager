@@ -18,8 +18,6 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
-
 @Entity
 @Table(name = "tasks")
 public class Task {

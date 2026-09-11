@@ -1,9 +1,12 @@
-package com.ekabotdev.taskmanager.task;
+package com.ekabotdev.taskmanager.task.service;
 
 import com.ekabotdev.taskmanager.task.dto.CreateTaskRequest;
 import com.ekabotdev.taskmanager.task.dto.PageResponse;
 import com.ekabotdev.taskmanager.task.dto.TaskResponse;
 import com.ekabotdev.taskmanager.task.dto.UpdateTaskRequest;
+import com.ekabotdev.taskmanager.task.enums.TaskPriority;
+import com.ekabotdev.taskmanager.task.enums.TaskStatus;
+import com.ekabotdev.taskmanager.task.specification.TaskSpecification;
 import com.ekabotdev.taskmanager.user.dto.UserSummaryResponse;
 import com.ekabotdev.taskmanager.task.entity.Task;
 import com.ekabotdev.taskmanager.user.entity.User;
@@ -13,10 +16,13 @@ import com.ekabotdev.taskmanager.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -65,12 +71,60 @@ public class TaskService {
     }
 
     @Transactional(readOnly = true)
-    public PageResponse<TaskResponse> getTasks (String authenticatedEmail, Pageable pageable) {
+    public PageResponse<TaskResponse> getTasks (
+            TaskStatus status,
+            TaskPriority priority,
+            String search,
+            String authenticatedEmail,
+             Pageable pageable) {
+
+
+        Set<String> allowedSortFields = Set.of(
+                "id",
+                "title",
+                "priority",
+                "status",
+                "dueDate",
+                "createdAt",
+                "updatedAt"
+        );
+
+        for (Sort.Order order : pageable.getSort()) {
+
+            if (!allowedSortFields.contains(order.getProperty())) {
+                throw new IllegalArgumentException(
+                        "Sorting by '" + order.getProperty() + "' is not supported."
+                );
+            }
+        }
+
 
         User user = userRepository.findByEmail(authenticatedEmail).orElseThrow(() ->
                 new ResourceNotFoundException("Authenticated user is not found.")
         );
-        Page<Task>  taskPage = taskRepository.findAllByUser_Id(user.getId(),pageable);
+
+        Specification<Task> specification = TaskSpecification.belongsToUser(user.getId());
+
+        if (status != null) {
+            specification = specification.and(
+                    TaskSpecification.hasStatus(status)
+            );
+        }
+
+        if (priority != null) {
+            specification = specification.and(
+                    TaskSpecification.hasPriority(priority)
+            );
+        }
+
+        if  (search != null && !search.isBlank()) {
+          specification = specification.and(
+                  TaskSpecification.search(search.trim())
+          );
+        }
+
+
+        Page<Task>  taskPage = taskRepository.findAll(specification, pageable);
 
         List<TaskResponse> content = taskPage.getContent()
                 .stream()
@@ -151,5 +205,31 @@ public class TaskService {
         );
         taskRepository.delete(task);
 
+    }
+
+    @Transactional(readOnly = true)
+    public PageResponse<TaskResponse> getOverdueTasks (String authenticatedEmail, Pageable pageable) {
+        User user = userRepository.findByEmail(authenticatedEmail).orElseThrow(()
+                -> new ResourceNotFoundException("Authenticated user is not found."));
+
+        Specification<Task> specification = TaskSpecification.belongsToUser(user.getId())
+                .and(TaskSpecification.isOverdue());
+
+        Page<Task> taskPage = taskRepository.findAll(specification, pageable);
+
+        List<TaskResponse> content = taskPage.getContent()
+                .stream()
+                .map(this::mapToResponse)
+                .toList();
+
+        return new PageResponse<>(
+                content,
+                taskPage.getNumber(),
+                taskPage.getSize(),
+                taskPage.getTotalElements(),
+                taskPage.getTotalPages(),
+                taskPage.isFirst(),
+                taskPage.isLast()
+        );
     }
 }
