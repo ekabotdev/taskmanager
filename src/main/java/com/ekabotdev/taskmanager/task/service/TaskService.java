@@ -38,6 +38,10 @@ public class TaskService {
         User user = userRepository.findByEmail(authenticatedEmail).orElseThrow(() ->
                 new ResourceNotFoundException("Authenticated user is not found."));
 
+        if (createTaskRequest.getDueDate() != null  &&
+        createTaskRequest.getDueDate().isBefore(LocalDateTime.now())) {
+            throw new BadRequestException("Due date cannot be in the past.");
+        }
         Task task = new Task();
         task.setTitle(createTaskRequest.getTitle());
         task.setDescription(createTaskRequest.getDescription());
