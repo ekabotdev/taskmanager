@@ -60,14 +60,14 @@ public class GlobalExceptionHandler {
                 request.getRequestURI()
         );
     }
-
+    
     @ExceptionHandler(BadRequestException.class)
     public ErrorsResponse handleBadRequestException
             (BadRequestException ex, HttpServletRequest request) {
-
+        
         return new ErrorsResponse(
                 LocalDateTime.now(),
-                HttpStatus.BAD_REQUEST.value(),
+                HttpStatus.BAD_REQUEST.value(), 
                 HttpStatus.BAD_REQUEST.getReasonPhrase(),
                 ex.getMessage(),
                 request.getRequestURI()

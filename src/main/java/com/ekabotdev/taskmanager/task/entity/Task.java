@@ -38,12 +38,12 @@ public class Task {
     @NotNull
     @Column(nullable = false, length = 20)
     @Enumerated(EnumType.STRING)
-    private TaskStatus taskStatus;
+    private TaskStatus status;
 
     @NotNull
     @Column(nullable = false, length = 20)
     @Enumerated(EnumType.STRING)
-    private TaskPriority taskPriority;
+    private TaskPriority priority;
 
     @NotNull
     @Column( name = "due_date",nullable = false)

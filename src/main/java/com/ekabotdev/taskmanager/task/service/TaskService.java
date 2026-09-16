@@ -45,8 +45,8 @@ public class TaskService {
         Task task = new Task();
         task.setTitle(createTaskRequest.getTitle());
         task.setDescription(createTaskRequest.getDescription());
-        task.setTaskStatus(createTaskRequest.getTaskStatus());
-        task.setTaskPriority(createTaskRequest.getPriority());
+        task.setStatus(createTaskRequest.getTaskStatus());
+        task.setPriority(createTaskRequest.getPriority());
         task.setDueDate(createTaskRequest.getDueDate());
 
         task.setUser(user);
@@ -67,8 +67,8 @@ public class TaskService {
                 task.getId(),
                 task.getTitle(),
                 task.getDescription(),
-                task.getTaskStatus(),
-                task.getTaskPriority(),
+                task.getStatus(),
+                task.getPriority(),
                 task.getDueDate(),
                 task.getCreatedAt(),
                 task.getUpdatedAt(),
@@ -199,13 +199,13 @@ public class TaskService {
         }
        if (request.getStatus() != null) {
            validateStatusTransition(
-                   task.getTaskStatus(),
+                   task.getStatus(),
                    request.getStatus()
            );
-           task.setTaskStatus(request.getStatus());
+           task.setStatus(request.getStatus());
        }
         if (request.getPriority() != null) {
-            task.setTaskPriority(request.getPriority());
+            task.setPriority(request.getPriority());
         }
         if (request.getDueDate() != null) {
             task.setDueDate(request.getDueDate());
