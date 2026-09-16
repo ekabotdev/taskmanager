@@ -1,0 +1,174 @@
+[33mcommit 3cf6f641c6b105acca84aa4d61892311921db565[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: ekabotdev <ekabotdev@gmail.com>
+Date:   Wed Sep 16 11:08:07 2026 +0300
+
+    feat: add database migration feature
+
+[33mcommit e310ce1784cd52fd9a690a610c4232eee2801e98[m
+Author: ekabotdev <ekabotdev@gmail.com>
+Date:   Fri Sep 11 21:16:44 2026 +0300
+
+    feat: vaildate task due dates
+
+[33mcommit 1c0eeead99dc4734c3bbe31d23e21e7ac47a06ff[m
+Author: ekabotdev <ekabotdev@gmail.com>
+Date:   Fri Sep 11 21:04:58 2026 +0300
+
+    feat: enforce task status transitions
+
+[33mcommit 6accdaf73ade336b1d68b1b7907d99cea71d2216[m
+Author: ekabotdev <ekabotdev@gmail.com>
+Date:   Fri Sep 11 20:50:06 2026 +0300
+
+    feat: add due date filtering
+
+[33mcommit f8fdbe2a3e8615c414e0294a62da0c7be655a62a[m
+Author: ekabotdev <ekabotdev@gmail.com>
+Date:   Fri Sep 11 20:38:02 2026 +0300
+
+    feat: implement specification feature
+
+[33mcommit c203f31a7d58a6f2102f55e1abffa15d1096bbb8[m
+Author: ekabotdev <ekabotdev@gmail.com>
+Date:   Fri Sep 4 16:09:49 2026 +0300
+
+    feat: restructure project
+
+[33mcommit 0b23ebe177e5dc682c80337b2d70295bc57f02e0[m
+Author: ekabotdev <ekabotdev@gmail.com>
+Date:   Mon Aug 10 08:58:34 2026 +0300
+
+    feat: add task deletion
+
+[33mcommit c04658a3806befcfedb36f93cea76370ff4b3aa4[m
+Author: ekabotdev <ekabotdev@gmail.com>
+Date:   Mon Aug 10 08:37:01 2026 +0300
+
+    feat: add task update
+
+[33mcommit ef7184cdfbcdfc5c26537061572c11a1daa36a5b[m
+Author: ekabotdev <ekabotdev@gmail.com>
+Date:   Thu Jul 30 12:15:45 2026 +0300
+
+    feat: add task retrieval by id
+
+[33mcommit 249c2543965b77d9b2a5f8aa76862f18df8a0594[m
+Author: ekabotdev <ekabotdev@gmail.com>
+Date:   Thu Jul 30 11:18:34 2026 +0300
+
+    feat: add paginated task listing
+
+[33mcommit f5f9cad6153c5a0654fe46561a142e6f687eeda4[m
+Author: ekabotdev <ekabotdev@gmail.com>
+Date:   Thu Jul 30 04:19:04 2026 +0300
+
+    feat: implement full task creation feature
+
+[33mcommit e5676e0423ea33cba5bc4aee09b7e4686198e1e2[m
+Author: ekabotdev <ekabotdev@gmail.com>
+Date:   Wed Jul 29 14:09:03 2026 +0300
+
+    feat: implemment task repsository interface
+
+[33mcommit 54da795dbee2e132ae0e2341dc12566051b8c5ea[m
+Author: ekabotdev <ekabotdev@gmail.com>
+Date:   Wed Jul 29 14:08:19 2026 +0300
+
+    refactor: restructured exception packages
+
+[33mcommit 9e98e91ed5325c8a7e445d6aebc2eb3dd7a5ad33[m
+Author: ekabotdev <ekabotdev@gmail.com>
+Date:   Wed Jul 29 13:09:07 2026 +0300
+
+    feat: implement createTaskRequest dto
+
+[33mcommit c1fd1a5d105e5c2d4d9d043a438caa1156049307[m
+Author: ekabotdev <ekabotdev@gmail.com>
+Date:   Wed Jul 29 12:50:27 2026 +0300
+
+    update: updated enums
+
+[33mcommit 5293073434a4dcbe330a4b5da967fb019c63db6c[m
+Author: ekabotdev <ekabotdev@gmail.com>
+Date:   Wed Jul 29 12:21:01 2026 +0300
+
+    feat: add task entity class
+
+[33mcommit 0e5480155f6e176591f9500da180c69d11c778eb[m
+Author: ekabotdev <ekabotdev@gmail.com>
+Date:   Wed Jul 29 11:42:18 2026 +0300
+
+    feat: implement full user registration feature and swagger openAPI documentation
+
+[33mcommit 753ae0402fc05c22600c3242017409d2bde5e99b[m
+Merge: 5e4ff12 3b84586
+Author: ekabotdev <ekabotdev@gmail.com>
+Date:   Mon Jul 27 08:43:19 2026 +0300
+
+    Merge branch 'main' of https://github.com/ekabotdev/taskmanager
+
+[33mcommit 5e4ff1233355d4208224fb39daad50244bac9347[m
+Author: ekabotdev <ekabotdev@gmail.com>
+Date:   Mon Jul 27 08:42:17 2026 +0300
+
+    feat: implement login request dto
+
+[33mcommit 3b8458604e79c670cd26c5add0c01c9bdb2b325d[m
+Author: ekabotdev <ekabotdev@gmail.com>
+Date:   Mon Jul 27 07:24:15 2026 +0300
+
+    Add README for Task Manager API documentation
+
+[33mcommit 4fa89b794bdf358c2fea169f3d67c14a0f4d4689[m
+Author: ekabotdev <ekabotdev@gmail.com>
+Date:   Sun Jul 26 15:46:46 2026 +0300
+
+    config: downgraded from springboot v4.0.1 to v3.5.4
+
+[33mcommit b55f2d59b54de1093c99982fba590171a960b1ff[m
+Author: ekabotdev <ekabotdev@gmail.com>
+Date:   Sat Jul 25 11:57:06 2026 +0300
+
+    feat: add global exception handling and validation responses
+
+[33mcommit 073322a7eccae71045fa07dd91ca29ceb1570668[m
+Author: ekabotdev <ekabotdev@gmail.com>
+Date:   Sat Jul 25 07:23:12 2026 +0300
+
+    feat: implement user registration
+
+[33mcommit ed2a2713ebe448969bea6ba0215f85cb27846aeb[m
+Author: ekabotdev <ekabotdev@gmail.com>
+Date:   Fri Jul 24 21:24:50 2026 +0300
+
+    update: rename register response to user response
+
+[33mcommit 6a5c236e670f464ce06304f283de11165bdb9abb[m
+Author: ekabotdev <ekabotdev@gmail.com>
+Date:   Fri Jul 24 21:14:35 2026 +0300
+
+    feat: add registration DTOs
+
+[33mcommit 8afb0767b722f291ff9e65b7dc313ea0e34dc462[m
+Author: ekabotdev <ekabotdev@gmail.com>
+Date:   Fri Jul 24 20:56:57 2026 +0300
+
+    feat: add User repository
+
+[33mcommit b0f2bd0463d3f14269aaff1aaeaa800c8c14082b[m
+Author: ekabotdev <ekabotdev@gmail.com>
+Date:   Fri Jul 24 20:46:18 2026 +0300
+
+    feat: add Role enum
+
+[33mcommit 065e89641596cf636796af82efba4953415a2abc[m
+Author: ekabotdev <ekabotdev@gmail.com>
+Date:   Fri Jul 24 20:45:42 2026 +0300
+
+    feat: add User entity
+
+[33mcommit 56fe9ebe4f25d527c05229a9ea69ea873eb51392[m
+Author: ekabotdev <ekabotdev@gmail.com>
+Date:   Thu Jul 23 21:07:27 2026 +0300
+
+    Intial springboot project setup
